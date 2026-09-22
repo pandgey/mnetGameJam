@@ -85,6 +85,16 @@ public class PlayerMovement : MonoBehaviour {
         _body.linearVelocity = velocity;
     }
 
+    public void ResetForRespawn () {
+        _moveInput = 0f;
+        _jumpHeld = false;
+        _rising = false;
+        _timeSinceGrounded = Mathf.Infinity;
+        _timeSinceJumpPressed = Mathf.Infinity;
+        _body.linearVelocity = Vector2.zero;
+        _body.angularVelocity = 0f;
+    }
+
     private bool IsGrounded () {
         // Casting the collider ignores itself, so no ground layer setup is needed.
         int hitCount = _collider.Cast (Vector2.down, _groundFilter, _groundHits, groundCheckDistance);
