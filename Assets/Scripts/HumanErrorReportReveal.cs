@@ -25,6 +25,7 @@ public class HumanErrorReportReveal : MonoBehaviour
     [Header("Reveal times (seconds from opening)")]
     [Min(0)] [SerializeField] private float headerTime = 0.20f;
     [Min(0)] [SerializeField] private float titleTime = 0.32f;
+    [Tooltip("Seconds after the reveal starts when the Completion Time row appears; not the player's completion time.")]
     [Min(0)] [SerializeField] private float completionTime = 0.60f;
     [Min(0)] [SerializeField] private float fatalTime = 0.90f;
     [Min(0)] [SerializeField] private float systemTime = 1.20f;
@@ -37,6 +38,7 @@ public class HumanErrorReportReveal : MonoBehaviour
     [Min(0.01f)] [SerializeField] private float footerFadeDuration = 0.20f;
 
     [Header("Mock result")]
+    // The index below and scene-authored stat text are placeholders, not live gameplay data.
     [Range(0, 100)] [SerializeField] private float finalHumanErrorIndex = 27.4f;
 
     private CanvasGroup[][] sections;
@@ -83,6 +85,20 @@ public class HumanErrorReportReveal : MonoBehaviour
             return;
         }
 
+        if (!continueButton.image)
+        {
+            Debug.LogError("Report reveal requires an Image on the Continue button.", this);
+            enabled = false;
+            return;
+        }
+        var processingSource = completionRow[0].GetComponent<TMP_Text>();
+        if (!processingSource)
+        {
+            Debug.LogError("Report reveal requires a TMP label as the first Completion Row reference.", this);
+            enabled = false;
+            return;
+        }
+
         // Preserve the approved rich-text sizes, colours, spacing and target line.
         // Only the number immediately before the smaller percent sign is replaced.
         var number = Regex.Match(errorIndex.text, @"\d+(?:\.\d+)?(?=<size=88>%)");
@@ -107,7 +123,7 @@ public class HumanErrorReportReveal : MonoBehaviour
 
         // A runtime-only copy borrows the existing IBM Plex label style.
         // It never changes the saved hierarchy or the final report layout.
-        processingLabel = Instantiate(completionRow[0].GetComponent<TMP_Text>(), transform);
+        processingLabel = Instantiate(processingSource, transform);
         processingLabel.name = "ProcessingLabel (runtime)";
         processingLabel.rectTransform.anchorMin = errorIndex.rectTransform.anchorMin;
         processingLabel.rectTransform.anchorMax = errorIndex.rectTransform.anchorMax;

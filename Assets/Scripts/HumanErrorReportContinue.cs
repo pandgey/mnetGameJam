@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-// Temporary behaviour for testing the standalone report screen.
+// Acknowledges the standalone report; level transitions are not connected yet.
 [RequireComponent(typeof(Button))]
 public class HumanErrorReportContinue : MonoBehaviour
 {
@@ -24,7 +24,6 @@ public class HumanErrorReportContinue : MonoBehaviour
             buttonLabel.text = acknowledgementText;
 
         continueButton.interactable = false;
-        Debug.Log("Report acknowledged. Gameplay transitions will be connected later.", this);
     }
 
     private void OnDestroy()

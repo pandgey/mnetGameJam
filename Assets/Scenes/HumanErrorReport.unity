@@ -2317,7 +2317,6 @@ MonoBehaviour:
   fadeDuration: 0.12
   footerFadeDuration: 0.2
   finalHumanErrorIndex: 27.4
-  allowSpaceSkip: 1
 --- !u!1 &2087944545
 GameObject:
   m_ObjectHideFlags: 0
