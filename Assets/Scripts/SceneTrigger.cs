@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class SceneTrigger : MonoBehaviour {
 
     [Header ("Destination")]
-    [SerializeField] private string sceneName = "Scene2";
+    [SerializeField] private string sceneName = "HumanErrorReport";
 
     [Header ("Activation")]
     [Tooltip ("Off: the scene loads the moment the player walks in. On: the player has to press the key below while standing inside.")]
@@ -47,8 +47,7 @@ public class SceneTrigger : MonoBehaviour {
     }
 
     private void Load () {
-        // The load finishes at the end of the frame, so without this guard a second
-        // trigger frame could queue the scene twice.
+        // The load finishes at the end of the frame, so without this guard a second trigger frame could queue the scene twice.
         if (_loading)
             return;
 
