@@ -2164,6 +2164,7 @@ GameObject:
   - component: {fileID: 1874139373}
   - component: {fileID: 1874139372}
   - component: {fileID: 1874139371}
+  - component: {fileID: 1874139375}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2270,6 +2271,53 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1874139375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1874139370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fcc999656cba5e4eb22c546d4e027be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HumanErrorReportReveal
+  header:
+  - {fileID: 2087944547}
+  - {fileID: 1617167924}
+  title: {fileID: 1240688114}
+  completionRow:
+  - {fileID: 351511841}
+  - {fileID: 1304829976}
+  - {fileID: 676223575}
+  fatalRow:
+  - {fileID: 55138209}
+  - {fileID: 1380114169}
+  - {fileID: 731005980}
+  systemRow:
+  - {fileID: 1194892523}
+  - {fileID: 562997101}
+  errorIndex: {fileID: 1057081391}
+  warning:
+  - {fileID: 1103570513}
+  - {fileID: 1643255150}
+  disclaimer: {fileID: 2146632050}
+  continueButton: {fileID: 2145314308}
+  headerTime: 0.2
+  titleTime: 0.32
+  completionTime: 0.6
+  fatalTime: 0.9
+  systemTime: 1.2
+  processingTime: 1.4
+  countTime: 1.8
+  countDuration: 0.65
+  warningTime: 2.55
+  footerTime: 2.8
+  fadeDuration: 0.12
+  footerFadeDuration: 0.2
+  finalHumanErrorIndex: 27.4
+  allowSpaceSkip: 1
 --- !u!1 &2087944545
 GameObject:
   m_ObjectHideFlags: 0
