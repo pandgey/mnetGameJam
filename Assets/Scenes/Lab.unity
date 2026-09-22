@@ -1741,7 +1741,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ManualOverrideTerminal
   skillCheck: {fileID: 1547717599}
-  skillCheckOverlay: {fileID: 1547717600}
+  skillCheckOverlay: {fileID: 903920366}
   prompt: {fileID: 2039557375}
   doorCollider: {fileID: 719698248}
   doorVisual: {fileID: 1424418544}
@@ -2979,14 +2979,14 @@ MonoBehaviour:
 
     APPROVED PARAMETERS'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ecfff7c37942448438270d95ce864f98, type: 2}
-  m_sharedMaterial: {fileID: -1124380927200434013, guid: ecfff7c37942448438270d95ce864f98, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: dd87563e2f2e6a3459002fe7dfaf3ab8, type: 2}
+  m_sharedMaterial: {fileID: 3028304446664136741, guid: dd87563e2f2e6a3459002fe7dfaf3ab8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4293324524
   m_fontColor: {r: 0.9254902, g: 0.93333334, b: 0.9019608, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -2999,7 +2999,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -3077,7 +3077,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -1124380927200434013, guid: ecfff7c37942448438270d95ce864f98, type: 2}
+  - {fileID: 3028304446664136741, guid: dd87563e2f2e6a3459002fe7dfaf3ab8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4094,6 +4094,11 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 17.165, y: 1}
   m_EdgeRadius: 0
+--- !u!1 &903920366 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5015273844287181341, guid: 2baa15bafdfab584cb6ed8306da74b2d, type: 3}
+  m_PrefabInstance: {fileID: 1547717598}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &963289250
 GameObject:
   m_ObjectHideFlags: 0
@@ -4505,14 +4510,14 @@ MonoBehaviour:
       m_Calls: []
   m_text: FOLLOW THE APPROVED ROUTE
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ecfff7c37942448438270d95ce864f98, type: 2}
-  m_sharedMaterial: {fileID: -1124380927200434013, guid: ecfff7c37942448438270d95ce864f98, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: dd87563e2f2e6a3459002fe7dfaf3ab8, type: 2}
+  m_sharedMaterial: {fileID: 3028304446664136741, guid: dd87563e2f2e6a3459002fe7dfaf3ab8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4293324524
   m_fontColor: {r: 0.9254902, g: 0.93333334, b: 0.9019608, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -4525,7 +4530,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -4603,7 +4608,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -1124380927200434013, guid: ecfff7c37942448438270d95ce864f98, type: 2}
+  - {fileID: 3028304446664136741, guid: dd87563e2f2e6a3459002fe7dfaf3ab8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6139,8 +6144,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: MANUAL INTERVENTION REQUIRED
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ecfff7c37942448438270d95ce864f98, type: 2}
-  m_sharedMaterial: {fileID: -1124380927200434013, guid: ecfff7c37942448438270d95ce864f98, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: dd87563e2f2e6a3459002fe7dfaf3ab8, type: 2}
+  m_sharedMaterial: {fileID: 3028304446664136741, guid: dd87563e2f2e6a3459002fe7dfaf3ab8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6237,7 +6242,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -1124380927200434013, guid: ecfff7c37942448438270d95ce864f98, type: 2}
+  - {fileID: 3028304446664136741, guid: dd87563e2f2e6a3459002fe7dfaf3ab8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6269,9 +6274,49 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 560018419222253162, guid: 2baa15bafdfab584cb6ed8306da74b2d, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4293324524
+      objectReference: {fileID: 0}
+    - target: {fileID: 560018419222253162, guid: 2baa15bafdfab584cb6ed8306da74b2d, type: 3}
+      propertyPath: m_TextStyleHashCode
+      value: -1183493901
+      objectReference: {fileID: 0}
+    - target: {fileID: 927711950571134399, guid: 2baa15bafdfab584cb6ed8306da74b2d, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4289968302
+      objectReference: {fileID: 0}
+    - target: {fileID: 927711950571134399, guid: 2baa15bafdfab584cb6ed8306da74b2d, type: 3}
+      propertyPath: m_TextStyleHashCode
+      value: -1183493901
+      objectReference: {fileID: 0}
+    - target: {fileID: 1312526499432113058, guid: 2baa15bafdfab584cb6ed8306da74b2d, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4289968302
+      objectReference: {fileID: 0}
+    - target: {fileID: 1312526499432113058, guid: 2baa15bafdfab584cb6ed8306da74b2d, type: 3}
+      propertyPath: m_TextStyleHashCode
+      value: -1183493901
+      objectReference: {fileID: 0}
     - target: {fileID: 5015273844287181341, guid: 2baa15bafdfab584cb6ed8306da74b2d, type: 3}
       propertyPath: m_Name
       value: ManualOverrideUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 6635218196673158313, guid: 2baa15bafdfab584cb6ed8306da74b2d, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4293324524
+      objectReference: {fileID: 0}
+    - target: {fileID: 6635218196673158313, guid: 2baa15bafdfab584cb6ed8306da74b2d, type: 3}
+      propertyPath: m_TextStyleHashCode
+      value: -1183493901
+      objectReference: {fileID: 0}
+    - target: {fileID: 7758962866921413577, guid: 2baa15bafdfab584cb6ed8306da74b2d, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4293324524
+      objectReference: {fileID: 0}
+    - target: {fileID: 7758962866921413577, guid: 2baa15bafdfab584cb6ed8306da74b2d, type: 3}
+      propertyPath: m_TextStyleHashCode
+      value: -1183493901
       objectReference: {fileID: 0}
     - target: {fileID: 7997689424448614367, guid: 2baa15bafdfab584cb6ed8306da74b2d, type: 3}
       propertyPath: m_Pivot.x
@@ -6353,6 +6398,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8871355810276347167, guid: 2baa15bafdfab584cb6ed8306da74b2d, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6363,17 +6412,12 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3537934433189539884, guid: 2baa15bafdfab584cb6ed8306da74b2d, type: 3}
   m_PrefabInstance: {fileID: 1547717598}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 903920366}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c55c7dd2224d56042b90b1b2255bd0f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ManualOverrideController
---- !u!1 &1547717600 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 871110029351148497, guid: 2baa15bafdfab584cb6ed8306da74b2d, type: 3}
-  m_PrefabInstance: {fileID: 1547717598}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1576047842
 GameObject:
   m_ObjectHideFlags: 0
@@ -6998,8 +7042,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 0:00
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ecfff7c37942448438270d95ce864f98, type: 2}
-  m_sharedMaterial: {fileID: -1124380927200434013, guid: ecfff7c37942448438270d95ce864f98, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: dd87563e2f2e6a3459002fe7dfaf3ab8, type: 2}
+  m_sharedMaterial: {fileID: 3028304446664136741, guid: dd87563e2f2e6a3459002fe7dfaf3ab8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -8150,7 +8194,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2039557376
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8192,14 +8236,14 @@ MonoBehaviour:
       m_Calls: []
   m_text: '[E] MANUAL OVERRIDE'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ecfff7c37942448438270d95ce864f98, type: 2}
-  m_sharedMaterial: {fileID: -1124380927200434013, guid: ecfff7c37942448438270d95ce864f98, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: dd87563e2f2e6a3459002fe7dfaf3ab8, type: 2}
+  m_sharedMaterial: {fileID: 3028304446664136741, guid: dd87563e2f2e6a3459002fe7dfaf3ab8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4293324524
   m_fontColor: {r: 0.9254902, g: 0.93333334, b: 0.9019608, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -8212,7 +8256,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -8290,7 +8334,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -1124380927200434013, guid: ecfff7c37942448438270d95ce864f98, type: 2}
+  - {fileID: 3028304446664136741, guid: dd87563e2f2e6a3459002fe7dfaf3ab8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

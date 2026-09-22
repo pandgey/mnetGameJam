@@ -178,8 +178,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: MANUAL OVERRIDE / STANDALONE TEST
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ecfff7c37942448438270d95ce864f98, type: 2}
-  m_sharedMaterial: {fileID: -1124380927200434013, guid: ecfff7c37942448438270d95ce864f98, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: dd87563e2f2e6a3459002fe7dfaf3ab8, type: 2}
+  m_sharedMaterial: {fileID: 3028304446664136741, guid: dd87563e2f2e6a3459002fe7dfaf3ab8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -631,8 +631,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: START CHECK
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ecfff7c37942448438270d95ce864f98, type: 2}
-  m_sharedMaterial: {fileID: -1124380927200434013, guid: ecfff7c37942448438270d95ce864f98, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: dd87563e2f2e6a3459002fe7dfaf3ab8, type: 2}
+  m_sharedMaterial: {fileID: 3028304446664136741, guid: dd87563e2f2e6a3459002fe7dfaf3ab8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -851,8 +851,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: One attempt per check. Start again to test another outcome.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ecfff7c37942448438270d95ce864f98, type: 2}
-  m_sharedMaterial: {fileID: -1124380927200434013, guid: ecfff7c37942448438270d95ce864f98, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: dd87563e2f2e6a3459002fe7dfaf3ab8, type: 2}
+  m_sharedMaterial: {fileID: 3028304446664136741, guid: dd87563e2f2e6a3459002fe7dfaf3ab8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
