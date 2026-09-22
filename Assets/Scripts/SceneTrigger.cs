@@ -8,6 +8,12 @@ public class SceneTrigger : MonoBehaviour {
     [Header ("Destination")]
     [SerializeField] private string sceneName = "HumanErrorReport";
 
+    [Header ("Level result (optional)")]
+    [SerializeField] private bool captureLevelResult = false;
+    [SerializeField] private LevelTimer levelTimer;
+    [SerializeField] private string nextSceneAfterReport = "Rooftop";
+    [SerializeField] private bool isFinalReport = false;
+
     [Header ("Activation")]
     [Tooltip ("Off: the scene loads the moment the player walks in. On: the player has to press the key below while standing inside.")]
     [SerializeField] private bool requireKeyPress = false;
@@ -15,6 +21,7 @@ public class SceneTrigger : MonoBehaviour {
 
     private bool _playerInside;
     private bool _loading;
+    private PlayerRespawn _enteringPlayer;
 
     void Reset () {
         // A door the player can walk through, not a wall they bump into.
@@ -27,6 +34,7 @@ public class SceneTrigger : MonoBehaviour {
             return;
 
         _playerInside = true;
+        _enteringPlayer = other.GetComponentInParent<PlayerRespawn> ();
 
         if (!requireKeyPress)
             Load ();
@@ -56,7 +64,22 @@ public class SceneTrigger : MonoBehaviour {
             return;
         }
 
+        if (captureLevelResult) {
+            if (levelTimer == null)
+                levelTimer = FindFirstObjectByType<LevelTimer> ();
+
+            if (levelTimer == null || _enteringPlayer == null || string.IsNullOrWhiteSpace (nextSceneAfterReport)) {
+                Debug.LogError ($"{name}: level completion needs a LevelTimer, PlayerRespawn and report destination.", this);
+                return;
+            }
+        }
+
         _loading = true;
+        if (captureLevelResult) {
+            levelTimer.StopTimer ();
+            LevelResult.Store (levelTimer.Elapsed, _enteringPlayer.DeathCount,
+                gameObject.scene.name, nextSceneAfterReport, isFinalReport);
+        }
         SceneManager.LoadScene (sceneName);
     }
 

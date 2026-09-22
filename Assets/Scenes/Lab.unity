@@ -510,6 +510,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneTrigger
   sceneName: HumanErrorReport
+  captureLevelResult: 1
+  levelTimer: {fileID: 1710000012}
+  nextSceneAfterReport: Rooftop
+  isFinalReport: 0
   requireKeyPress: 0
   interactKey: 19
 --- !u!61 &365018729
