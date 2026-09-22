@@ -4696,6 +4696,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerRespawn
   fallDeathY: -9
+  deathSound: {fileID: 8300000, guid: 8913ea6b3afb8224a9ab38553ecc72b8, type: 3}
+  deathSoundVolume: 1
 --- !u!1 &1623630702
 GameObject:
   m_ObjectHideFlags: 0

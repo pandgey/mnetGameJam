@@ -14,12 +14,17 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private float jumpBufferTime = 0.1f;
     [SerializeField, Range (0f, 1f)] private float jumpCutMultiplier = 0.5f;
 
+    [Header ("Audio")]
+    [SerializeField] private AudioClip jumpSound;
+    [SerializeField, Range (0f, 1f)] private float jumpSoundVolume = 1f;
+
     [Header ("Ground check")]
     [SerializeField] private float groundCheckDistance = 0.05f;
     [SerializeField] private float minGroundNormalY = 0.5f;
 
     private Rigidbody2D _body;
     private Collider2D _collider;
+    private AudioSource _audioSource;
     private ContactFilter2D _groundFilter;
     private readonly RaycastHit2D[] _groundHits = new RaycastHit2D[8];
 
@@ -32,6 +37,7 @@ public class PlayerMovement : MonoBehaviour {
     void Awake () {
         _body = GetComponent<Rigidbody2D> ();
         _collider = GetComponent<Collider2D> ();
+        _audioSource = PlayerAudio.GetOrAddSource (gameObject);
 
         // Rotation would let the player topple over when it lands on a corner.
         _body.freezeRotation = true;
@@ -69,6 +75,7 @@ public class PlayerMovement : MonoBehaviour {
         if (_timeSinceJumpPressed <= jumpBufferTime && _timeSinceGrounded <= coyoteTime) {
             velocity.y = jumpSpeed;
             _rising = true;
+            PlayerAudio.Play (_audioSource, jumpSound, jumpSoundVolume);
 
             // Consume both windows so one press cannot trigger a second jump.
             _timeSinceJumpPressed = Mathf.Infinity;
