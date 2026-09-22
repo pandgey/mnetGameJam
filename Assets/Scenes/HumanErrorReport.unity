@@ -2304,6 +2304,10 @@ MonoBehaviour:
   - {fileID: 1643255150}
   disclaimer: {fileID: 2146632050}
   continueButton: {fileID: 2145314308}
+  completionTimeValue: {fileID: 1304829976}
+  fatalErrorsValue: {fileID: 1380114169}
+  reportIdentification: {fileID: 1617167924}
+  assessment: {fileID: 1103570513}
   headerTime: 0.2
   titleTime: 0.32
   completionTime: 0.6
@@ -2527,6 +2531,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HumanErrorReportContinue
   acknowledgementText: ACKNOWLEDGED
+  loadDelay: 0.45
 --- !u!1 &2146632048
 GameObject:
   m_ObjectHideFlags: 0

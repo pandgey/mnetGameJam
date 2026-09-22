@@ -22,6 +22,12 @@ public class HumanErrorReportReveal : MonoBehaviour
     [SerializeField] private TMP_Text disclaimer;
     [SerializeField] private Button continueButton;
 
+    [Header("Result text")]
+    [SerializeField] private TMP_Text completionTimeValue;
+    [SerializeField] private TMP_Text fatalErrorsValue;
+    [SerializeField] private TMP_Text reportIdentification;
+    [SerializeField] private TMP_Text assessment;
+
     [Header("Reveal times (seconds from opening)")]
     [Min(0)] [SerializeField] private float headerTime = 0.20f;
     [Min(0)] [SerializeField] private float titleTime = 0.32f;
@@ -38,7 +44,7 @@ public class HumanErrorReportReveal : MonoBehaviour
     [Min(0.01f)] [SerializeField] private float footerFadeDuration = 0.20f;
 
     [Header("Mock result")]
-    // The index below and scene-authored stat text are placeholders, not live gameplay data.
+    // The index remains a development placeholder. Scene stats are a direct-preview fallback.
     [Range(0, 100)] [SerializeField] private float finalHumanErrorIndex = 27.4f;
 
     private CanvasGroup[][] sections;
@@ -59,6 +65,10 @@ public class HumanErrorReportReveal : MonoBehaviour
         warning = FindGraphics("Assessment", "WarningRule");
         disclaimer = FindText("ReportDisclaimer");
         continueButton = transform.Find("ContinueButton")?.GetComponent<Button>();
+        completionTimeValue = FindText("CompletionTimeValue");
+        fatalErrorsValue = FindText("FatalErrorsValue");
+        reportIdentification = FindText("AuthorityHeader");
+        assessment = FindText("Assessment");
     }
 
     private Graphic[] FindGraphics(params string[] names)
@@ -156,7 +166,36 @@ public class HumanErrorReportReveal : MonoBehaviour
 
     private void Start()
     {
+        ApplyLevelResult();
         StartCoroutine(RevealReport());
+    }
+
+    private void ApplyLevelResult()
+    {
+        LevelResult result = LevelResult.Current;
+        if (result == null) return; // Preserve the authored mock report for direct scene testing.
+
+        if (!completionTimeValue || !fatalErrorsValue || !reportIdentification || !assessment)
+        {
+            Debug.LogError("Report result text has missing Inspector references. Check the Canvas component.", this);
+            return;
+        }
+
+        // Use whole hundredths so rounding cannot produce an invalid time such as 00:60.00.
+        int hundredths = Mathf.FloorToInt(result.CompletionSeconds * 100f);
+        string time = string.Format(CultureInfo.InvariantCulture, "{0:00}:{1:00}.{2:00}",
+            hundredths / 6000, hundredths / 100 % 60, hundredths % 100);
+        // Replace only the visible value inside the existing rich-text styling.
+        completionTimeValue.text = Regex.Replace(completionTimeValue.text, @"(?<=>)[^<>]+(?=<)", time);
+        fatalErrorsValue.text = Regex.Replace(fatalErrorsValue.text, @"(?<=>)[^<>]+(?=<)",
+            result.Deaths.ToString("00", CultureInfo.InvariantCulture));
+
+        if (result.IsFinalReport)
+        {
+            reportIdentification.text = reportIdentification.text.Replace("HUMAN PERFORMANCE AUTHORITY", "SUBJECT DEPARTURE CONFIRMED");
+            assessment.text = assessment.text.Replace("PERFORMANCE OUTSIDE ACCEPTABLE PARAMETERS",
+                "CONTAINMENT FAILURE CLASSIFIED AS HUMAN ERROR");
+        }
     }
 
     private IEnumerator RevealReport()

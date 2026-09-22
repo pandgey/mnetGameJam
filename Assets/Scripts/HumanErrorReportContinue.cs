@@ -10,14 +10,13 @@ public class HumanErrorReportContinue : MonoBehaviour
 {
     [SerializeField] private string acknowledgementText = "ACKNOWLEDGED";
 
-    [Header("Destination")]
-    [SerializeField] private string nextSceneName = "Rooftop";
     [Tooltip("Seconds the acknowledgement stays on screen before the next scene loads.")]
     [Min(0)] [SerializeField] private float loadDelay = 0.45f;
 
     private Button continueButton;
     private TMP_Text buttonLabel;
     private bool loading;
+    private string nextSceneName;
 
     private void Awake()
     {
@@ -28,8 +27,10 @@ public class HumanErrorReportContinue : MonoBehaviour
 
     private void AcknowledgeReport()
     {
-        if (loading)
+        if (loading || !continueButton.interactable)
             return;
+
+        nextSceneName = LevelResult.Current != null ? LevelResult.Current.NextScene : "MainMenu";
 
         if (buttonLabel != null)
             buttonLabel.text = acknowledgementText;
@@ -50,6 +51,7 @@ public class HumanErrorReportContinue : MonoBehaviour
     {
         // Unscaled, to match the reveal: the report runs while the game is paused.
         yield return new WaitForSecondsRealtime(loadDelay);
+        LevelResult.Clear();
         SceneManager.LoadScene(nextSceneName);
     }
 
