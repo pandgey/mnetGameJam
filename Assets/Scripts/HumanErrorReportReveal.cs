@@ -44,13 +44,15 @@ public class HumanErrorReportReveal : MonoBehaviour
     [Min(0.01f)] [SerializeField] private float footerFadeDuration = 0.20f;
 
     [Header("Mock result")]
-    // The index remains a development placeholder. Scene stats are a direct-preview fallback.
+    // Used only when this scene is opened directly without a gameplay result.
     [Range(0, 100)] [SerializeField] private float finalHumanErrorIndex = 27.4f;
 
     private CanvasGroup[][] sections;
     private TMP_Text processingLabel;
     private string indexTemplate;
     private string finalIndexText;
+    private float displayedIndex;
+    private CanvasGroup[] overrideSection;
 
     // Unity calls Reset when this component is added in the Inspector.
     // References are then saved in the scene; no runtime name searches are needed.
@@ -119,7 +121,11 @@ public class HumanErrorReportReveal : MonoBehaviour
             return;
         }
         indexTemplate = errorIndex.text.Remove(number.Index, number.Length).Insert(number.Index, "{INDEX}");
-        finalIndexText = IndexText(finalHumanErrorIndex);
+        displayedIndex = LevelResult.Current != null ? LevelResult.Current.HumanErrorIndex : finalHumanErrorIndex;
+        finalIndexText = IndexText(displayedIndex);
+
+        if (LevelResult.Current != null && LevelResult.Current.CompletedScene == "Lab")
+            CreateOverrideRow(LevelResult.Current.OverrideFailures);
 
         sections = new[]
         {
@@ -151,6 +157,28 @@ public class HumanErrorReportReveal : MonoBehaviour
         if (graphics == null || graphics.Length == 0) return false;
         foreach (var graphic in graphics) if (!graphic) return false;
         return true;
+    }
+
+    private void CreateOverrideRow(int failures)
+    {
+        // Borrow the approved row styling; Rooftop and direct previews stay unchanged.
+        // Compact only Lab's right column to accommodate its one extra statistic.
+        foreach (var graphic in fatalRow) graphic.rectTransform.anchoredPosition += Vector2.up * 40f;
+        completionRow[2].rectTransform.anchoredPosition += Vector2.up * 30f;
+        foreach (var graphic in systemRow) graphic.rectTransform.anchoredPosition += Vector2.down * 60f;
+        var row = new Graphic[fatalRow.Length];
+        for (int i = 0; i < row.Length; i++)
+        {
+            row[i] = Instantiate(fatalRow[i], transform);
+            row[i].name = i == 0 ? "OverrideFailuresLabel" : i == 1 ? "OverrideFailuresValue" : "OverrideFailuresDivider";
+            row[i].rectTransform.anchoredPosition += Vector2.down * 110f;
+        }
+        var label = (TMP_Text)row[0];
+        label.text = label.text.Replace("FATAL ERRORS", "OVERRIDE FAILURES");
+        var value = (TMP_Text)row[1];
+        value.text = Regex.Replace(value.text, @"(?<=>)[^<>]+(?=<)", failures.ToString("00", CultureInfo.InvariantCulture));
+        overrideSection = MakeGroups(row);
+        SetAlpha(overrideSection, 0);
     }
 
     private static CanvasGroup[] MakeGroups(params Graphic[] graphics)
@@ -213,14 +241,15 @@ public class HumanErrorReportReveal : MonoBehaviour
             Fade(sections[1], elapsed, titleTime, fadeDuration);
             Fade(sections[2], elapsed, completionTime, fadeDuration);
             Fade(sections[3], elapsed, fatalTime, fadeDuration);
-            Fade(sections[4], elapsed, systemTime, fadeDuration);
+            if (overrideSection != null) Fade(overrideSection, elapsed, systemTime, fadeDuration);
+            Fade(sections[4], elapsed, overrideSection != null ? processingTime : systemTime, fadeDuration);
             processingLabel.gameObject.SetActive(elapsed >= processingTime && elapsed < countStart);
 
             if (elapsed >= countStart)
             {
                 SetAlpha(sections[5], 1);
                 float progress = Mathf.Clamp01((elapsed - countStart) / Mathf.Max(0.01f, countDuration));
-                string text = IndexText(Mathf.SmoothStep(0, finalHumanErrorIndex, progress));
+                string text = IndexText(Mathf.SmoothStep(0, displayedIndex, progress));
                 // Transparent target retains exactly the same line spacing while counting.
                 errorIndex.text = progress < 1 ? text.Replace("<color=#ECEEE6>", "<color=#ECEEE600>") : finalIndexText;
             }
@@ -253,6 +282,7 @@ public class HumanErrorReportReveal : MonoBehaviour
         processingLabel.gameObject.SetActive(false);
         errorIndex.text = finalIndexText;
         foreach (var section in sections) SetAlpha(section, 1);
+        if (overrideSection != null) SetAlpha(overrideSection, 1);
         if (EventSystem.current) EventSystem.current.SetSelectedGameObject(null);
 
         // Wait for release AND a neutral frame so a held submit/click cannot acknowledge.

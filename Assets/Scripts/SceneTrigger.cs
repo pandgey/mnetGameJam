@@ -11,6 +11,7 @@ public class SceneTrigger : MonoBehaviour {
     [Header ("Level result (optional)")]
     [SerializeField] private bool captureLevelResult = false;
     [SerializeField] private LevelTimer levelTimer;
+    [SerializeField] private ManualOverrideTerminal overrideTerminal;
     [SerializeField] private string nextSceneAfterReport = "Rooftop";
     [SerializeField] private bool isFinalReport = false;
 
@@ -78,7 +79,8 @@ public class SceneTrigger : MonoBehaviour {
         if (captureLevelResult) {
             levelTimer.StopTimer ();
             LevelResult.Store (levelTimer.Elapsed, _enteringPlayer.DeathCount,
-                gameObject.scene.name, nextSceneAfterReport, isFinalReport);
+                gameObject.scene.name, nextSceneAfterReport, isFinalReport,
+                overrideTerminal ? overrideTerminal.OverrideFailures : 0);
         }
         SceneManager.LoadScene (sceneName);
     }

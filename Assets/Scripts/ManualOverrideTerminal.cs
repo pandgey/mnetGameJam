@@ -1,8 +1,9 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-// Lab's single-use terminal. The existing controller owns the timing check itself.
+// Lab's terminal accepts retries until success. The controller owns each timing check.
 [RequireComponent(typeof(BoxCollider2D))]
 public class ManualOverrideTerminal : MonoBehaviour
 {
@@ -12,8 +13,20 @@ public class ManualOverrideTerminal : MonoBehaviour
     [SerializeField] private Collider2D doorCollider;
     [SerializeField] private GameObject doorVisual;
 
+    [Header("Original baseline and difficulty multipliers")]
+    [SerializeField, Min(0.1f)] private float originalPassDuration = 2.5f;
+    [SerializeField, Range(0.01f, 1f)] private float originalTargetWidth = 0.25f;
+    [SerializeField, Min(0.1f)] private float firstAttemptSpeedMultiplier = 2.5f;
+    [SerializeField, Range(0.01f, 1f)] private float firstAttemptWidthMultiplier = 0.4f;
+    [SerializeField, Min(0.1f)] private float hardSpeedMultiplier = 2f;
+    [SerializeField, Range(0.01f, 1f)] private float hardWidthMultiplier = 0.5f;
+    [SerializeField, Min(0.1f)] private float assistedSpeedMultiplier = 1.5f;
+    [SerializeField, Range(0.01f, 1f)] private float assistedWidthMultiplier = 0.75f;
+
     public bool HasCompleted { get; private set; }
-    public bool OverrideFailed { get; private set; }
+    public int OverrideFailures { get; private set; }
+    private bool assistanceEnabled;
+    private TMP_Text promptLabel;
 
     private PlayerMovement player;
     private PlayerRespawn respawn;
@@ -27,6 +40,7 @@ public class ManualOverrideTerminal : MonoBehaviour
     private void Awake()
     {
         if (prompt) prompt.SetActive(false);
+        if (prompt) promptLabel = prompt.GetComponentInChildren<TMP_Text>(true);
         if (!skillCheck || !skillCheckOverlay || !prompt || !doorCollider || !doorVisual)
         {
             Debug.LogError("Manual Override terminal: assign the UI, prompt and door references.", this);
@@ -37,6 +51,7 @@ public class ManualOverrideTerminal : MonoBehaviour
     private void OnEnable()
     {
         if (skillCheck) skillCheck.Completed += OnCompleted;
+        if (skillCheck) skillCheck.Resolved += OnResolved;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -65,7 +80,7 @@ public class ManualOverrideTerminal : MonoBehaviour
         if (running && (!skillCheck || !skillCheck.isActiveAndEnabled ||
             !skillCheck.IsRunning || !skillCheckOverlay || !skillCheckOverlay.activeInHierarchy))
         {
-            FailOpen();
+            CancelAttempt();
             return;
         }
 
@@ -101,7 +116,7 @@ public class ManualOverrideTerminal : MonoBehaviour
     {
         if (!skillCheck || !skillCheck.isActiveAndEnabled || skillCheck.IsRunning)
         {
-            FailOpen();
+            CancelAttempt();
             return;
         }
 
@@ -116,15 +131,37 @@ public class ManualOverrideTerminal : MonoBehaviour
         respawn.enabled = false;
         prompt.SetActive(false);
         running = true;
+        float speedMultiplier = assistanceEnabled ? assistedSpeedMultiplier : hardSpeedMultiplier;
+        float widthMultiplier = assistanceEnabled ? assistedWidthMultiplier : hardWidthMultiplier;
+        if (OverrideFailures == 0)
+        {
+            speedMultiplier = firstAttemptSpeedMultiplier;
+            widthMultiplier = firstAttemptWidthMultiplier;
+        }
+        skillCheck.ConfigureDifficulty(
+            originalPassDuration / speedMultiplier,
+            originalTargetWidth * widthMultiplier);
         skillCheck.StartCheck();
+    }
+
+    private void OnResolved(bool success)
+    {
+        if (!running || HasCompleted || success) return;
+        OverrideFailures++;
+        if (promptLabel) promptLabel.text = "[E] RETRY OVERRIDE";
+        if (OverrideFailures == 3 && !assistanceEnabled)
+        {
+            assistanceEnabled = true;
+            skillCheck.ShowCorrectiveAssistance();
+        }
     }
 
     private void OnCompleted(bool success)
     {
         if (!running || HasCompleted) return;
-        OverrideFailed = !success;
         running = false;
-        OpenDoor();
+        interactionArmed = false;
+        if (success) OpenDoor();
         StartCoroutine(RestoreAfterInputRelease());
     }
 
@@ -167,7 +204,7 @@ public class ManualOverrideTerminal : MonoBehaviour
         if (player) player.enabled = movementWasEnabled;
     }
 
-    private void FailOpen()
+    private void CancelAttempt()
     {
         running = false;
         // OnDisable cancels the existing controller without producing a result.
@@ -177,15 +214,17 @@ public class ManualOverrideTerminal : MonoBehaviour
             skillCheck.enabled = false;
             skillCheck.enabled = wasEnabled;
         }
-        OpenDoor();
+        interactionArmed = false;
         StopAllCoroutines();
-        RestorePlayer();
+        if (isActiveAndEnabled) StartCoroutine(RestoreAfterInputRelease());
+        else RestorePlayer();
     }
 
     private void OnDisable()
     {
         if (skillCheck) skillCheck.Completed -= OnCompleted;
+        if (skillCheck) skillCheck.Resolved -= OnResolved;
         // Also handles a terminal being disabled while waiting for input release.
-        FailOpen();
+        CancelAttempt();
     }
 }

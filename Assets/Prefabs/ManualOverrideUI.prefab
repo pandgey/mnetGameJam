@@ -823,18 +823,13 @@ MonoBehaviour:
   statusLabel: {fileID: 560018419222253162}
   actionKey: 19
   preparationDuration: 0.35
-  passDuration: 2.5
+  passDuration: 1.25
   targetCentre: 0.65
-  targetWidth: 0.25
+  targetWidth: 0.125
   resultDuration: 1.5
   title: MANUAL OVERRIDE
   successText: OVERRIDE ACCEPTED
-  failureText: 'MANUAL OVERRIDE FAILED
-
-    FAILSAFE RELEASE ACTIVE
-
-    HUMAN ERROR
-    RECORDED'
+  failureText: "MANUAL OVERRIDE FAILED\nHUMAN ERROR RECORDED\nRETRY REQUIRED"
 --- !u!1 &6458153490470031882
 GameObject:
   m_ObjectHideFlags: 0
