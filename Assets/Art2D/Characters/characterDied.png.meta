@@ -1,19 +1,31 @@
 fileFormatVersion: 2
-guid: ba3f9d917808211418b0ef4de861f679
+guid: 67f405b81c9eae84a9338d12d093c5d0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3613184697797453386
-    second: characterSheet2_0
+      213: -6828674282771587249
+    second: characterDied_0
   - first:
-      213: -357829464790415807
-    second: characterSheet2_1
+      213: 6685543010092955903
+    second: characterDied_1
   - first:
-      213: -8271067928301136798
-    second: characterSheet2_2
+      213: -1550380202434890790
+    second: characterDied_2
   - first:
-      213: -9171545955446294360
-    second: characterSheet2_3
+      213: 6941884982045923570
+    second: characterDied_3
+  - first:
+      213: -3861600549881034400
+    second: characterDied_4
+  - first:
+      213: -8754089358519631998
+    second: characterDied_5
+  - first:
+      213: -4399253560109911579
+    second: characterDied_6
+  - first:
+      213: 330630101583413901
+    second: characterDied_7
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -60,7 +72,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -105,119 +117,181 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: characterSheet2_0
+      name: characterDied_0
       rect:
         serializedVersion: 2
-        x: 22
+        x: 21
+        y: 11
+        width: 38
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4fdd807becab31a0800000000000000
+      internalID: -6828674282771587249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: characterDied_1
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 10
+        width: 44
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff8bf2732f1d7cc50800000000000000
+      internalID: 6685543010092955903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: characterDied_2
+      rect:
+        serializedVersion: 2
+        x: 124
         y: 12
-        width: 22
-        height: 59
+        width: 28
+        height: 54
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a462814d65c942230800000000000000
-      internalID: 3613184697797453386
+      spriteID: ad3f11f8b61fb7ae0800000000000000
+      internalID: -1550380202434890790
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: characterSheet2_1
+      name: characterDied_3
       rect:
         serializedVersion: 2
-        x: 63
-        y: 14
-        width: 24
-        height: 57
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 146cff46ffbb80bf0800000000000000
-      internalID: -357829464790415807
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: characterSheet2_2
-      rect:
-        serializedVersion: 2
-        x: 93
-        y: 14
-        width: 40
-        height: 60
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2641c7c8a83473d80800000000000000
-      internalID: -8271067928301136798
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: characterSheet2_3
-      rect:
-        serializedVersion: 2
-        x: 149
+        x: 145
         y: 12
-        width: 26
-        height: 60
+        width: 46
+        height: 76
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8a8f374eb8f18b080800000000000000
-      internalID: -9171545955446294360
+      spriteID: 2f8577a8c97865060800000000000000
+      internalID: 6941884982045923570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: characterDied_4
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 14
+        width: 37
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06943ef62c6d86ac0800000000000000
+      internalID: -3861600549881034400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: characterDied_5
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 15
+        width: 30
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28ff86d0c1a338680800000000000000
+      internalID: -8754089358519631998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: characterDied_6
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 15
+        width: 30
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e1b6c00236b2f2c0800000000000000
+      internalID: -4399253560109911579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: characterDied_7
+      rect:
+        serializedVersion: 2
+        x: 327
+        y: 16
+        width: 30
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d824eec5352a69400800000000000000
+      internalID: 330630101583413901
       vertices: []
       indices: 
       edges: []
@@ -226,7 +300,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: e531c15cb6b914445a821e22ff7eb035
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -234,14 +308,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries:
-      - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+      entries: []
     nameFileIdTable:
-      characterSheet2_0: 3613184697797453386
-      characterSheet2_1: -357829464790415807
-      characterSheet2_2: -8271067928301136798
-      characterSheet2_3: -9171545955446294360
+      characterDied_0: -6828674282771587249
+      characterDied_1: 6685543010092955903
+      characterDied_2: -1550380202434890790
+      characterDied_3: 6941884982045923570
+      characterDied_4: -3861600549881034400
+      characterDied_5: -8754089358519631998
+      characterDied_6: -4399253560109911579
+      characterDied_7: 330630101583413901
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
