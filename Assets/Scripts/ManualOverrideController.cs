@@ -18,30 +18,34 @@ public class ManualOverrideController : MonoBehaviour
     [Header("Timing")]
     [SerializeField] private Key actionKey = Key.E;
     [SerializeField, Min(0f)] private float preparationDuration = 0.35f;
-    [SerializeField, Min(0.1f)] private float passDuration = 2.5f;
+    [SerializeField, Min(0.1f)] private float passDuration = 1.25f;
     [SerializeField, Range(0f, 1f)] private float targetCentre = 0.65f;
-    [SerializeField, Range(0.01f, 1f)] private float targetWidth = 0.25f;
+    [SerializeField, Range(0.01f, 1f)] private float targetWidth = 0.125f;
     [SerializeField, Min(0.1f)] private float resultDuration = 1.5f;
+    [SerializeField, Min(0.1f)] private float assistanceMessageDuration = 2f;
 
     [Header("Wording")]
     [SerializeField] private string title = "MANUAL OVERRIDE";
     [SerializeField] private string successText = "OVERRIDE ACCEPTED";
     [SerializeField, TextArea] private string failureText =
-        "MANUAL OVERRIDE FAILED\nFAILSAFE RELEASE ACTIVE\nHUMAN ERROR RECORDED";
+        "MANUAL OVERRIDE FAILED\nHUMAN ERROR RECORDED\nRETRY REQUIRED";
 
     // Fired once, after the result has been displayed and the overlay closes.
     public event Action<bool> Completed;
+    // A genuine timing result, before its display delay. Cancellation never fires this.
+    public event Action<bool> Resolved;
     public bool HasResult { get; private set; }
     public bool LastSucceeded { get; private set; }
     public bool IsRunning => phase != Phase.Idle;
 
-    private enum Phase { Idle, WaitingForRelease, Preparing, Moving, Result }
+    private enum Phase { Idle, WaitingForRelease, Preparing, Moving, Result, Assistance }
     private Phase phase;
     private float elapsed;
     private float position;
     private float zoneStart;
     private float zoneEnd;
     private Color normalStatusColour;
+    private bool showAssistance;
     private readonly Color failureColour = new Color32(255, 93, 82, 255);
 
     private void Awake()
@@ -65,6 +69,7 @@ public class ManualOverrideController : MonoBehaviour
 
         HasResult = false;
         LastSucceeded = false;
+        showAssistance = false;
         elapsed = 0f;
         SetMarkerPosition(0f);
 
@@ -142,12 +147,37 @@ public class ManualOverrideController : MonoBehaviour
                 elapsed += Time.unscaledDeltaTime;
                 if (elapsed >= Mathf.Max(0.1f, resultDuration))
                 {
-                    phase = Phase.Idle;
-                    overlay.SetActive(false);
-                    Completed?.Invoke(LastSucceeded);
+                    if (showAssistance)
+                    {
+                        elapsed = 0f;
+                        phase = Phase.Assistance;
+                        statusLabel.text = "CORRECTIVE ASSISTANCE ENABLED\nOPERATOR PERFORMANCE BELOW REQUIRED STANDARD";
+                    }
+                    else CloseResult();
                 }
                 break;
+
+            case Phase.Assistance:
+                elapsed += Time.unscaledDeltaTime;
+                if (elapsed >= assistanceMessageDuration) CloseResult();
+                break;
         }
+    }
+
+    public void ConfigureDifficulty(float seconds, float width)
+    {
+        if (IsRunning) return;
+        passDuration = Mathf.Max(0.1f, seconds);
+        targetWidth = Mathf.Clamp(width, 0.01f, 1f);
+    }
+
+    public void ShowCorrectiveAssistance() => showAssistance = true;
+
+    private void CloseResult()
+    {
+        phase = Phase.Idle;
+        overlay.SetActive(false);
+        Completed?.Invoke(LastSucceeded);
     }
 
     private void SetMarkerPosition(float value)
@@ -166,6 +196,7 @@ public class ManualOverrideController : MonoBehaviour
         statusLabel.color = success ? normalStatusColour : failureColour;
         elapsed = 0f;
         phase = Phase.Result;
+        Resolved?.Invoke(success);
     }
 
     private void OnDisable()

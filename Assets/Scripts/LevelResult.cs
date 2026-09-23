@@ -7,22 +7,25 @@ public sealed class LevelResult
 
     public float CompletionSeconds { get; }
     public int Deaths { get; }
+    public int OverrideFailures { get; }
+    public float HumanErrorIndex => Mathf.Clamp(Deaths * 15f + OverrideFailures * 10f, 0f, 100f);
     public string CompletedScene { get; }
     public string NextScene { get; }
     public bool IsFinalReport { get; }
 
-    private LevelResult(float seconds, int deaths, string completedScene, string nextScene, bool isFinalReport)
+    private LevelResult(float seconds, int deaths, string completedScene, string nextScene, bool isFinalReport, int overrideFailures)
     {
         CompletionSeconds = seconds;
         Deaths = deaths;
+        OverrideFailures = overrideFailures;
         CompletedScene = completedScene;
         NextScene = nextScene;
         IsFinalReport = isFinalReport;
     }
 
-    public static void Store(float seconds, int deaths, string completedScene, string nextScene, bool isFinalReport)
+    public static void Store(float seconds, int deaths, string completedScene, string nextScene, bool isFinalReport, int overrideFailures = 0)
     {
-        Current = new LevelResult(seconds, deaths, completedScene, nextScene, isFinalReport);
+        Current = new LevelResult(seconds, deaths, completedScene, nextScene, isFinalReport, overrideFailures);
     }
 
     public static void Clear() => Current = null;
