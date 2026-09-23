@@ -184,5 +184,7 @@ MonoBehaviour:
   coyoteTime: 0.1
   jumpBufferTime: 0.1
   jumpCutMultiplier: 0.5
+  jumpSound: {fileID: 8300000, guid: a7c8f50ca6d8d374bb23eb3c027a74b9, type: 3}
+  jumpSoundVolume: 1
   groundCheckDistance: 0.05
   minGroundNormalY: 0.5

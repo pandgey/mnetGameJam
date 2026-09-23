@@ -6,10 +6,15 @@ public class PlayerRespawn : MonoBehaviour
 {
     [SerializeField] private float fallDeathY = -6f;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip deathSound;
+    [SerializeField, Range(0f, 1f)] private float deathSoundVolume = 1f;
+
     public int DeathCount { get; private set; }
 
     private PlayerMovement movement;
     private Rigidbody2D body;
+    private AudioSource audioSource;
     private Vector2 respawnPosition;
     private bool isRespawning;
 
@@ -17,6 +22,7 @@ public class PlayerRespawn : MonoBehaviour
     {
         movement = GetComponent<PlayerMovement>();
         body = GetComponent<Rigidbody2D>();
+        audioSource = PlayerAudio.GetOrAddSource(gameObject);
         respawnPosition = body.position;
     }
 
@@ -39,6 +45,7 @@ public class PlayerRespawn : MonoBehaviour
 
         isRespawning = true;
         DeathCount++;
+        PlayerAudio.Play(audioSource, deathSound, deathSoundVolume);
         StartCoroutine(Respawn());
     }
 
