@@ -22,22 +22,36 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private float groundCheckDistance = 0.05f;
     [SerializeField] private float minGroundNormalY = 0.5f;
 
+    [Header ("Visuals")]
+    [Tooltip ("Tick if the sprite sheet frames are drawn facing right.")]
+    [SerializeField] private bool artFacesRight = true;
+
     private Rigidbody2D _body;
     private Collider2D _collider;
     private AudioSource _audioSource;
+    private Animator _animator;
+    private SpriteRenderer _sprite;
     private ContactFilter2D _groundFilter;
     private readonly RaycastHit2D[] _groundHits = new RaycastHit2D[8];
 
     private float _moveInput;
     private bool _jumpHeld;
     private bool _rising;
+    private bool _grounded;
     private float _timeSinceGrounded = Mathf.Infinity;
     private float _timeSinceJumpPressed = Mathf.Infinity;
+
+    private static readonly int SpeedParam = Animator.StringToHash ("Speed");
+    private static readonly int GroundedParam = Animator.StringToHash ("Grounded");
+    private static readonly int VelocityYParam = Animator.StringToHash ("VelocityY");
 
     void Awake () {
         _body = GetComponent<Rigidbody2D> ();
         _collider = GetComponent<Collider2D> ();
         _audioSource = PlayerAudio.GetOrAddSource (gameObject);
+        // Visuals may sit on a child object so the art can be offset from the collider.
+        _animator = GetComponentInChildren<Animator> ();
+        _sprite = GetComponentInChildren<SpriteRenderer> ();
 
         // Rotation would let the player topple over when it lands on a corner.
         _body.freezeRotation = true;
@@ -64,10 +78,13 @@ public class PlayerMovement : MonoBehaviour {
             || keyboard.upArrowKey.wasPressedThisFrame;
 
         _timeSinceJumpPressed = jumpPressed ? 0f : _timeSinceJumpPressed + Time.deltaTime;
+
+        UpdateVisuals ();
     }
 
     void FixedUpdate () {
-        _timeSinceGrounded = IsGrounded () ? 0f : _timeSinceGrounded + Time.fixedDeltaTime;
+        _grounded = IsGrounded ();
+        _timeSinceGrounded = _grounded ? 0f : _timeSinceGrounded + Time.fixedDeltaTime;
 
         Vector2 velocity = _body.linearVelocity;
         velocity.x = _moveInput * moveSpeed;
@@ -96,10 +113,26 @@ public class PlayerMovement : MonoBehaviour {
         _moveInput = 0f;
         _jumpHeld = false;
         _rising = false;
+        _grounded = false;
         _timeSinceGrounded = Mathf.Infinity;
         _timeSinceJumpPressed = Mathf.Infinity;
         _body.linearVelocity = Vector2.zero;
         _body.angularVelocity = 0f;
+    }
+
+    private void UpdateVisuals () {
+        // Keep facing the last direction pressed instead of snapping back when idle.
+        if (_sprite != null && _moveInput != 0f)
+            _sprite.flipX = (_moveInput < 0f) == artFacesRight;
+
+        // Without a controller assigned the Animator would warn about every missing parameter.
+        if (_animator == null || _animator.runtimeAnimatorController == null)
+            return;
+
+        Vector2 velocity = _body.linearVelocity;
+        _animator.SetFloat (SpeedParam, Mathf.Abs (velocity.x));
+        _animator.SetBool (GroundedParam, _grounded);
+        _animator.SetFloat (VelocityYParam, velocity.y);
     }
 
     private bool IsGrounded () {
